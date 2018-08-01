@@ -6,12 +6,12 @@ console.log(mergeSort)
 const PORT = process.env.PORT || 8000
 var conString = process.env.DATABASE_URL || 'postgres://localhost:5432/swish'
 var client = new pg.Client(conString)
-// var fs = require("fs");
+var fs = require("fs")
 
 var app = express()
 client.connect()
 
-// express route
+// express api endpoint at localhost:8000/
 
 app.get('/', (req, res) => {
   var {playerId} = req.query
@@ -24,17 +24,14 @@ app.get('/', (req, res) => {
   }
 
   client.query(query, (err, response) => {
-    let eventQuery
-    let playerQuery
 
     if (eventId && playerId) {
-      eventQuery = mergeSort(bsearchFindAll(response.rows, eventId, 'eventId'), playerId)
+      const eventQuery = mergeSort(bsearchFindAll(response.rows, eventId, 'eventId'), playerId)
       res.send(eventQuery[binarySearch(eventQuery, playerId, 'playerId')])
-      console.log('hit correct route')
     } else if (eventId) {
       res.send(bsearchFindAll(response.rows, eventId, 'eventId'))
     } else if (playerId) {
-      playerQuery = mergeSort(response.rows, playerId)
+      const playerQuery = mergeSort(response.rows, playerId)
       res.send(playerQuery[binarySearch(playerQuery, playerId, 'playerId')])
     } else {
       res.send(response.rows)
@@ -50,7 +47,6 @@ app.listen(PORT, () => {
   console.log(__dirname)
   console.log(`listening on ${PORT}`)
 })
-
 
 // Code used to seed database with data.json file
 

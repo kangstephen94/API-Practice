@@ -1,4 +1,4 @@
-// Implementation of mergesort
+
 function mergeSort (arr, query) {
   if (arr.length === 1) {
     // return once we hit an array with a single item
@@ -34,7 +34,6 @@ function merge (left, right) {
   return result.concat(left.slice(indexLeft)).concat(right.slice(indexRight))
 }
 
-// Implementation of binary search using recursion
 function binarySearch (array, targetValue, query) {
   if (array.length === 0) {
     return null
@@ -44,7 +43,6 @@ function binarySearch (array, targetValue, query) {
   
   var currentObj
   
-  // Based on the query string, binarySearch changes dynamically
   query === 'eventId' ? currentObj = array[middle].player.event_id : array[middle].player.id
   
   if (currentObj > targetValue) {
@@ -59,8 +57,10 @@ function binarySearch (array, targetValue, query) {
   }
 }
 
-// Define another function bsearchFindAll using binarySearch defined above to find all objects that are related to a certain event
-function bsearchFindAll(arr, target, query) {
+// function bsearchFindAll uses binarySearch defined above to return ALL elements whose eventId matches with the query.
+// This method is still O(n) worst case, assuming all of the elements have the same eventId, however in most cases it is O(log n + k), where k is the number of matches in the array.
+
+function bsearchFindAll (arr, target, query) {
   const idx = binarySearch(arr, target, query)
   const result = []
   
