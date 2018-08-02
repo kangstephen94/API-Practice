@@ -2,7 +2,6 @@ const { mergeSort, binarySearch, bsearchFindAll } = require('./helper-functions'
 
 var express = require('express')
 var pg = require('pg')
-console.log(mergeSort)
 const PORT = process.env.PORT || 8000
 var conString = process.env.DATABASE_URL || 'postgres://localhost:5432/swish'
 var client = new pg.Client(conString)

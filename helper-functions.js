@@ -41,10 +41,14 @@ function binarySearch (array, targetValue, query) {
   
   const middle = Math.floor(array.length / 2)
   
-  var currentObj
-  
-  query === 'eventId' ? currentObj = array[middle].player.event_id : array[middle].player.id
-  
+  let currentObj
+
+  if (query === 'eventId') {
+    currentObj = array[middle].player.event_id 
+  } else {
+    currentObj = array[middle].player.id
+  }
+
   if (currentObj > targetValue) {
     const leftArray = array.slice(0, middle)
     return binarySearch(leftArray, targetValue, query)
